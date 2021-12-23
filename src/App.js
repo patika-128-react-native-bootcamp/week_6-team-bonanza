@@ -1,27 +1,32 @@
-import React from 'react';
-import {View, Text} from 'react-native';
+const hash = 'a24ffde7d50d7764ef14aa0df7efa918';
+import React, {useEffect, useState} from 'react';
+import {View, Text, SafeAreaView} from 'react-native';
+import axios from 'axios';
 
-/**
- * Selamlar. Bu ödevde sizden Marvel API'nı kullanarak bir uygulama yapmanız isteniyor.
- * Uygulama içerisinde kullanıcı kahraman adına göre arama yapabilecek, Marvel çizgi romanlarının listesine
- * erişim sağlayabilecek ve ilgili çizgi romanda yer alan kahramanların listesini görebilecek. Kullanıcı eğer isterse
- * sevdiği çizgi romanı ya da kahramanı favorilerine alabilecek. Favoriye aldığı öğeyi uygulamaya geri girdiğinde de görebilecek.
- * Bu ister için AsyncStorage paketini kullanabilirsiniz. Uygulama içinde gece gündüz modu ve dil desteği de isteniyor. Bunun için
- * bir Ayarlar sayfası eklenebilir. Gece gündüz modunun default değerini telefonun ayarlarından tespit edilip belirlenmesi önemli bir ister.
- *
- * Marvel API: https://developer.marvel.com/
- * AsyncStorage: https://react-native-async-storage.github.io/async-storage/docs/install/
- *
- * ## Dil desteği için opsiyonel ##
- * React i18next: https://react.i18next.com/
- *
- * Başarılar..
- */
+function App() {
+  const [items, setItems] = useState([]);
+  const [isLoading, setLoading] = useState(true);
 
-export default function App() {
+  useEffect(() => {
+    const fetch = async () => {
+      const result = await axios(
+        //Api Connection
+        `https://gateway.marvel.com:443/v1/public/comics?ts=1&apikey=931517162d96f2a2551ae5f33cd51066&hash=${hash}`,
+      );
+      console.log(result.data.data.results); // Get comics
+      setItems(result.data.data.results); // Get comics list
+      setLoading(false); // Loading status
+    };
+    fetch();
+  }, []);
+
   return (
-    <View>
-      <Text>{/* code is here... */}</Text>
-    </View>
+    <SafeAreaView>
+      <View>
+        <Text>Marvel Api Connection</Text>
+      </View>
+    </SafeAreaView>
   );
 }
+
+export default App;
