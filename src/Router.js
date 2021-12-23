@@ -2,6 +2,15 @@ const hash = 'a24ffde7d50d7764ef14aa0df7efa918';
 import React, {useEffect, useState} from 'react';
 import {View, Text, SafeAreaView} from 'react-native';
 import axios from 'axios';
+import {NavigationContainer} from '@react-navigation/native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+
+import Home from './pages/Home';
+import Comics from './pages/Comics';
+import Heros from './pages/Heros';
+import Favorites from './pages/Favorites';
+
+const Tab = createBottomTabNavigator();
 
 function App() {
   const [items, setItems] = useState([]);
@@ -21,11 +30,17 @@ function App() {
   }, []);
 
   return (
-    <SafeAreaView>
-      <View>
-        <Text>Marvel Api Connection</Text>
-      </View>
-    </SafeAreaView>
+    <NavigationContainer>
+      <Tab.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}>
+        <Tab.Screen name="Home" component={Home} />
+        <Tab.Screen name="Comics" component={Comics} />
+        <Tab.Screen name="Heros" component={Heros} />
+        <Tab.Screen name="Favorites" component={Favorites} />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
 
