@@ -1,9 +1,9 @@
 const hash = 'a24ffde7d50d7764ef14aa0df7efa918';
 import React, {useEffect, useState} from 'react';
-import {View, Text, SafeAreaView} from 'react-native';
 import axios from 'axios';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Home from './pages/Home';
 import Comics from './pages/Comics';
@@ -35,10 +35,42 @@ function App() {
         screenOptions={{
           headerShown: false,
         }}>
-        <Tab.Screen name="Home" component={Home} />
-        <Tab.Screen name="Comics" component={Comics} />
-        <Tab.Screen name="Heros" component={Heros} />
-        <Tab.Screen name="Favorites" component={Favorites} />
+        <Tab.Screen
+          name="Home"
+          component={Home}
+          options={{
+            tabBarIcon: ({color, size}) => (
+              <Icon name="home" size={40} color="#808080" />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Comics"
+          component={Comics}
+          options={{
+            tabBarIcon: ({color, size}) => (
+              <Icon name="book-open" size={40} color="#808080" />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Heros"
+          component={Heros}
+          options={{
+            tabBarIcon: ({color, size}) => (
+              <Icon name="react" size={40} color="#808080" />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Favorites"
+          component={Favorites}
+          options={{
+            tabBarIcon: ({color, size}) => (
+              <Icon name="heart-multiple" size={40} color="#808080" />
+            ),
+          }}
+        />
       </Tab.Navigator>
     </NavigationContainer>
   );
