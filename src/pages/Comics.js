@@ -1,7 +1,37 @@
-import React from 'react';
-import {SafeAreaView, StyleSheet, View, Text} from 'react-native';
-import Card from '../components/card';
-function Comics() {
+import React, {useEffect, useState} from 'react';
+import {Text, View, StyleSheet, FlatList} from 'react-native';
+import ComicCard from '../components/card';
+import axios from 'axios';
+import {SafeAreaView} from 'react-native-safe-area-context';
+const hash = 'a24ffde7d50d7764ef14aa0df7efa918';
+
+function ComicList() {
+  const [items, setItems] = useState([]);
+  const [isLoading, setLoading] = useState(true);
+  const [query, setQuery] = useState('');
+  console.log(query);
+  //API Connection
+  useEffect(() => {
+    const fetch = async () => {
+      const tempData = await axios(
+        `https://gateway.marvel.com:443/v1/public/comics?ts=1&apikey=931517162d96f2a2551ae5f33cd51066&hash=${hash}`,
+      );
+      //console.log(tempData.data.data.results);
+      setItems(tempData.data.data.results);
+      setLoading(false);
+    };
+    fetch();
+  }, [query]);
+
+  const renderProducts = ({item}) => (
+    <ComicCard
+      title={item.title}
+      date={item.modified}
+      img={item.thumbnail.path + '/portrait_xlarge.jpg'}
+    />
+  );
+
+  // Screen Display
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.first}>
@@ -9,12 +39,7 @@ function Comics() {
         <View style={styles.line} />
       </View>
       <View style={styles.second}>
-        <Card
-          title="Iron-Man"
-          desc="Iron Man is a superhero appearing in American comic books published by Marvel Comics. The character was co-created by writer and editor Stan Lee, developed by scripter Larry Lieber, and designed by artists Don Heck and Jack Kirby. The character made his first appearance in Tales of Suspense #39 (cover dated March 1963), and received his own title in Iron Man #1 (May 1968). Also in 1963, the character founded the Avengers alongside Thor, Ant-Man, Wasp and the Hulk."
-          img="https://upload.wikimedia.org/wikipedia/en/4/47/Iron_Man_%28circa_2018%29.png"
-          date="July 2018"
-        />
+        <FlatList data={items} renderItem={renderProducts} />
       </View>
     </SafeAreaView>
   );
@@ -47,13 +72,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     marginTop: 25,
   },
-  explanation: {
-    fontSize: 14,
-    textAlign: 'left',
-    //fontFamily: 'Gilroy-Regular',
-    left: 15,
-    marginTop: 25,
-    marginBottom: 20,
-  },
 });
-export default Comics;
+
+export default ComicList;
