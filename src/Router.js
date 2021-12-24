@@ -111,7 +111,6 @@ const styles = StyleSheet.create({
   },
   onFocus: {
     color: '#ec1d23',
-    size: 40,
   },
   offFocus: {
     color: '#808080',
