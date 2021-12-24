@@ -4,6 +4,7 @@ import axios from 'axios';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {StyleSheet} from 'react-native';
 
 import Home from './pages/Home';
 import Comics from './pages/Comics';
@@ -34,13 +35,28 @@ function App() {
       <Tab.Navigator
         screenOptions={{
           headerShown: false,
+          tabBarStyle: {
+            position: 'absolute',
+            alignItems: 'center',
+            height: 90,
+            left: 20,
+            right: 20,
+            bottom: 25,
+            elevation: 0,
+            borderRadius: 15,
+          },
         }}>
         <Tab.Screen
           name="Home"
           component={Home}
           options={{
-            tabBarIcon: ({color, size}) => (
-              <Icon name="home" size={40} color="#808080" />
+            tabBarIcon: ({focused}) => (
+              <Icon
+                name="home"
+                size={focused ? 40 : 30}
+                // eslint-disable-next-line react-native/no-inline-styles
+                style={focused ? styles.onFocus : styles.offFocus}
+              />
             ),
           }}
         />
@@ -48,8 +64,12 @@ function App() {
           name="Comics"
           component={Comics}
           options={{
-            tabBarIcon: ({color, size}) => (
-              <Icon name="book-open" size={40} color="#808080" />
+            tabBarIcon: ({focused}) => (
+              <Icon
+                name="book-open"
+                size={focused ? 40 : 30}
+                style={focused ? styles.onFocus : styles.offFocus}
+              />
             ),
           }}
         />
@@ -57,8 +77,12 @@ function App() {
           name="Heros"
           component={Heros}
           options={{
-            tabBarIcon: ({color, size}) => (
-              <Icon name="react" size={40} color="#808080" />
+            tabBarIcon: ({focused}) => (
+              <Icon
+                name="spider-web"
+                size={focused ? 40 : 30}
+                style={focused ? styles.onFocus : styles.offFocus}
+              />
             ),
           }}
         />
@@ -66,8 +90,12 @@ function App() {
           name="Favorites"
           component={Favorites}
           options={{
-            tabBarIcon: ({color, size}) => (
-              <Icon name="heart-multiple" size={40} color="#808080" />
+            tabBarIcon: ({focused}) => (
+              <Icon
+                size={focused ? 40 : 30}
+                name="heart-multiple"
+                style={focused ? styles.onFocus : styles.offFocus}
+              />
             ),
           }}
         />
@@ -77,3 +105,15 @@ function App() {
 }
 
 export default App;
+const styles = StyleSheet.create({
+  tabNavigator: {
+    backgroundColor: 'yellow',
+  },
+  onFocus: {
+    color: '#ec1d23',
+    size: 40,
+  },
+  offFocus: {
+    color: '#808080',
+  },
+});
