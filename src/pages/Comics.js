@@ -3,22 +3,31 @@ import {Text, View, StyleSheet, FlatList} from 'react-native';
 import ComicCard from '../components/card';
 import axios from 'axios';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import Search from '../components/search';
 const hash = 'a24ffde7d50d7764ef14aa0df7efa918';
 
 function ComicList() {
   const [items, setItems] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const [query, setQuery] = useState('');
-  console.log(query);
   //API Connection
   useEffect(() => {
     const fetch = async () => {
-      const tempData = await axios(
-        `https://gateway.marvel.com:443/v1/public/comics?ts=1&apikey=931517162d96f2a2551ae5f33cd51066&hash=${hash}`,
-      );
-      //console.log(tempData.data.data.results);
-      setItems(tempData.data.data.results);
-      setLoading(false);
+      if (query == '') {
+        const tempData = await axios(
+          `https://gateway.marvel.com:443/v1/public/comics?ts=1&apikey=931517162d96f2a2551ae5f33cd51066&hash=${hash}`,
+        );
+        //console.log(tempData.data.data.results);
+        setItems(tempData.data.data.results);
+        setLoading(false);
+      } else {
+        const tempData = await axios(
+          `https://gateway.marvel.com:443/v1/public/comics?titleStartsWith=${query}&ts=1&apikey=931517162d96f2a2551ae5f33cd51066&hash=${hash}`,
+        );
+        //console.log(tempData.data.data.results);
+        setItems(tempData.data.data.results);
+        setLoading(false);
+      }
     };
     fetch();
   }, [query]);
@@ -36,6 +45,7 @@ function ComicList() {
     <SafeAreaView style={styles.container}>
       <View style={styles.first}>
         <Text style={styles.header}>Comics</Text>
+        <Search search={q => setQuery(q)} />
         <View style={styles.line} />
       </View>
       <View style={styles.second}>
@@ -65,7 +75,7 @@ const styles = StyleSheet.create({
     fontWeight: '900',
     color: '#ec1d23',
     left: 15,
-    top: 20,
+    top: 6,
   },
   line: {
     borderBottomColor: '#DDDDE1',
