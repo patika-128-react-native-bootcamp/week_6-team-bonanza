@@ -37,4 +37,16 @@ export default StyleSheet.create({
   cift: {
     flexDirection: 'row',
   },
+  likeButton: {
+    position: 'absolute',
+    top: 5,
+    right: 5,
+    color: '#ec1d23',
+  },
+  unLikeButton: {
+    position: 'absolute',
+    top: 5,
+    right: 5,
+    color: '#748c94',
+  },
 });
