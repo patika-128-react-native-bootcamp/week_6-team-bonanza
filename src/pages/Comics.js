@@ -8,25 +8,22 @@ const hash = 'a24ffde7d50d7764ef14aa0df7efa918';
 
 function ComicList() {
   const [items, setItems] = useState([]);
-  const [isLoading, setLoading] = useState(true);
   const [query, setQuery] = useState('');
   //API Connection
   useEffect(() => {
     const fetch = async () => {
-      if (query == '') {
+      if (query === '') {
         const tempData = await axios(
           `https://gateway.marvel.com:443/v1/public/comics?ts=1&apikey=931517162d96f2a2551ae5f33cd51066&hash=${hash}`,
         );
         //console.log(tempData.data.data.results);
         setItems(tempData.data.data.results);
-        setLoading(false);
       } else {
         const tempData = await axios(
           `https://gateway.marvel.com:443/v1/public/comics?titleStartsWith=${query}&ts=1&apikey=931517162d96f2a2551ae5f33cd51066&hash=${hash}`,
         );
         //console.log(tempData.data.data.results);
         setItems(tempData.data.data.results);
-        setLoading(false);
       }
     };
     fetch();

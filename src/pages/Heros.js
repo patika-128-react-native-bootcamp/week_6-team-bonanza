@@ -47,7 +47,7 @@ function ComicList() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.first}>
-        <Text style={styles.header}>Comics</Text>
+        <Text style={styles.header}>Heros</Text>
         <Search search={q => setQuery(q)} />
         <View style={styles.line} />
       </View>
