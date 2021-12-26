@@ -1,17 +1,19 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {Text, View, StyleSheet, FlatList} from 'react-native';
 import ComicCard from '../components/card';
 import axios from 'axios';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Search from '../components/search';
-
+import {Context} from '../Router';
 const hash = 'a24ffde7d50d7764ef14aa0df7efa918';
+import {useTranslation} from 'react-i18next';
 
 function ComicList() {
+  const {t} = useTranslation();
+  const darkContext = useContext(Context);
   const [items, setItems] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const [query, setQuery] = useState('');
-  console.log(query);
   //API Connection
   useEffect(() => {
     const fetch = async () => {
@@ -45,11 +47,17 @@ function ComicList() {
 
   // Screen Display
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView
+      style={[
+        styles.container,
+        darkContext.dark && {backgroundColor: 'black'},
+      ]}>
       <View style={styles.first}>
-        <Text style={styles.header}>Heros</Text>
-        <Search search={q => setQuery(q)} />
-        <View style={styles.line} />
+        <Text style={styles.header}>{t('heros')}</Text>
+        <Search
+          search={q => setQuery(q)}
+          placeholder={t('search_heros_placeholder')}
+        />
       </View>
       <View style={styles.second}>
         <FlatList data={items} renderItem={renderProducts} />
@@ -62,7 +70,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 5,
-    backgroundColor: '#F4F4F6',
+    backgroundColor: 'white',
   },
   first: {
     flex: 0.17,
@@ -73,12 +81,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   header: {
-    fontSize: 50,
-    //fontFamily: 'Gilroy-Heavy',
+    fontSize: 30,
     fontWeight: '900',
     color: '#ec1d23',
     left: 15,
     top: 5,
+    marginBottom: 20,
   },
   line: {
     borderBottomColor: '#DDDDE1',

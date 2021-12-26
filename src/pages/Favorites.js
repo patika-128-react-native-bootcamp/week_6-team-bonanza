@@ -1,20 +1,22 @@
-import React from 'react';
-import {SafeAreaView, Text, View, StyleSheet} from 'react-native';
+import React, {useContext} from 'react';
+import {SafeAreaView, Text, View, StyleSheet, FlatList} from 'react-native';
 import FavoritesCard from '../components/favorites';
+import {Context} from '../Router';
+import {useTranslation} from 'react-i18next';
+
 function Favorites() {
+  const {t} = useTranslation();
+  const {dark, favorite, setFavorite} = useContext(Context);
+
+  const renderFavorites = ({item}) => (
+    <FavoritesCard title={item.id} date={item.id} desc={item.id} />
+  );
+
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.first}>
-        <Text style={styles.header}>Favorites</Text>
-        <View style={styles.line} />
-      </View>
+    <SafeAreaView
+      style={[styles.container, dark && {backgroundColor: 'black'}]}>
       <View style={styles.second}>
-        <FavoritesCard
-          title="Sueda Çiçekli"
-          img="https://yt3.ggpht.com/MamZP51gExu-1sJIYcE2kE06487o3nuRxmzX36kc1YPpVxx1ta1aHx4TGKv2qgkQVGEVSt-7qXc=s900-c-k-c0x00ffffff-no-rj"
-          date="xx.xx.1999"
-          desc="Junior IOS Developer"
-        />
+        <FlatList data={favorite} renderItem={renderFavorites} />
       </View>
     </SafeAreaView>
   );
@@ -23,7 +25,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 5,
-    backgroundColor: '#F4F4F6',
+    backgroundColor: 'white',
   },
   first: {
     flex: 0.17,
@@ -34,12 +36,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   header: {
-    fontSize: 50,
-    //fontFamily: 'Gilroy-Heavy',
+    fontSize: 30,
     fontWeight: '900',
     color: '#ec1d23',
     left: 15,
     top: 5,
+    marginBottom: 20,
   },
   line: {
     borderBottomColor: '#DDDDE1',

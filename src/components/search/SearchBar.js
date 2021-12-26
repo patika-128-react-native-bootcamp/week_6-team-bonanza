@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {TextInput, View} from 'react-native';
 import styles from './SearchBar.styles';
 
-const SearchBar = ({search}) => {
+const SearchBar = ({search, placeholder}) => {
   const [text, setText] = useState('');
 
   const onSearch = q => {
@@ -13,9 +13,11 @@ const SearchBar = ({search}) => {
   return (
     <View style={styles.container}>
       <TextInput
-        placeholder="Search Comics.."
+        placeholder={placeholder}
+        placeholderTextColor={'black'}
         onChangeText={onSearch}
         autoFocus
+        style={{backgroundColor: 'white', color: 'black'}}
       />
     </View>
   );
