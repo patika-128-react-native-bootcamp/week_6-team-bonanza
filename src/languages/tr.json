@@ -1,0 +1,14 @@
+{
+  "translation": {
+    "home": "Anasayfa",
+    "comics": "Çizgi Romanlar",
+    "heros": "Kahramanlar",
+    "favorites": "Favoriler",
+    "search_comics_placeholder": "Çizgi Roman Ara..",
+    "search_heros_placeholder": "Kahraman Ara..",
+    "overview": "Genel Bakış",
+    "settings": "Ayarlar",
+    "dark_mode": "Koyu Mod",
+    "language": "Dil"
+  }
+}
