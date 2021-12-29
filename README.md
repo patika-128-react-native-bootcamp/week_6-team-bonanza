@@ -2,4 +2,4 @@
 
 ### Uygulama GIF
 
-![ezgif-6-286a6759c6](https://user-images.githubusercontent.com/88403704/147693126-bff56ba3-3c7a-4b07-91ad-2e4ad2a712ca.gif)
+![ezgif-6-7c00ff7ad0](https://user-images.githubusercontent.com/88403704/147693387-8d133375-4e28-4710-ac63-32ee41bfdf45.gif)
