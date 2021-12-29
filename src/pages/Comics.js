@@ -8,7 +8,7 @@ import ComicCard from '../components/card';
 import Search from '../components/search';
 import {Context} from '../Router';
 
-const hash = 'a24ffde7d50d7764ef14aa0df7efa918';
+const hash = '0bec9478434f6ffd8abe344711802636';
 
 function ComicList() {
   const {t} = useTranslation();
@@ -20,12 +20,12 @@ function ComicList() {
     const fetch = async () => {
       if (query === '') {
         const tempData = await axios(
-          `https://gateway.marvel.com:443/v1/public/comics?ts=1&apikey=931517162d96f2a2551ae5f33cd51066&hash=${hash}`,
+          `https://gateway.marvel.com:443/v1/public/comics?ts=1&apikey=0a6e8a03d98494c305b8a004db928590&hash=${hash}`,
         );
         setItems(tempData.data.data.results);
       } else {
         const tempData = await axios(
-          `https://gateway.marvel.com:443/v1/public/comics?titleStartsWith=${query}&ts=1&apikey=931517162d96f2a2551ae5f33cd51066&hash=${hash}`,
+          `https://gateway.marvel.com:443/v1/public/comics?titleStartsWith=${query}&ts=1&apikey=0a6e8a03d98494c305b8a004db928590&hash=${hash}`,
         );
         //console.log(tempData.data.data.results);
         setItems(tempData.data.data.results);
@@ -40,6 +40,7 @@ function ComicList() {
       date={item.modified}
       img={item.thumbnail.path + '/portrait_xlarge.jpg'}
       comicId={item.id}
+      id={item.id}
     />
   );
 
