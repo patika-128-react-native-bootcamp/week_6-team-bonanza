@@ -1,0 +1,14 @@
+{
+  "translation": {
+    "home": "Home",
+    "comics": "Comics",
+    "heros": "Heros",
+    "favorites": "Favorites",
+    "search_comics_placeholder": "Search Comics..",
+    "search_heros_placeholder": "Search Heros..",
+    "overview": "Overview",
+    "settings": "Settings",
+    "dark_mode": "Dark Mode",
+    "language": "Language"
+  }
+}

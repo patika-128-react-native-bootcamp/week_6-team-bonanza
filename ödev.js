@@ -1,6 +1,3 @@
-import React from 'react';
-import {View, Text} from 'react-native';
-
 /**
  * Selamlar. Bu ödevde sizden Marvel API'nı kullanarak bir uygulama yapmanız isteniyor.
  * Uygulama içerisinde kullanıcı kahraman adına göre arama yapabilecek, Marvel çizgi romanlarının listesine
@@ -17,11 +14,3 @@ import {View, Text} from 'react-native';
  *
  * Başarılar..
  */
-
-export default function App() {
-  return (
-    <View>
-      <Text>{/* code is here... */}</Text>
-    </View>
-  );
-}
